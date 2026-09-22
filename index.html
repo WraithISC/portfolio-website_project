@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isaac Cid Entrolizo | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        :root {
+            --bg:       #18191c;
+            --surface:  #212226;
+            --border:   #2e2f34;
+            --muted:    #5a5c63;
+            --subtle:   #8a8c94;
+            --body:     #c9cad0;
+            --heading:  #e8e9ec;
+            --accent:   #a78bca;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--body);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── PAGE SHELL ── */
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 24px 64px;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 1500px;
+        }
+
+        /* ── HEADER ── */
+        header {
+            padding: 52px 0 28px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0;
+        }
+
+        .site-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--heading);
+            letter-spacing: 0.01em;
+            line-height: 1.15;
+        }
+
+        .site-subtitle {
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--subtle);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── NAV BAR ── */
+        nav {
+            width: 100%;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 32px;
+        }
+
+        nav a {
+            color: var(--subtle);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 12px 18px;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        nav a:hover { color: var(--body); }
+
+        nav a.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        /* ── BODY LAYOUT ── */
+        .body-layout {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            width: 200px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 25px;
+        }
+
+        .sidebar-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .qual-item {
+            padding: 25px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .qual-item:last-child {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .qual-role {
+            display: block;
+            font-size: 12.5px;
+            font-weight: 500;
+            color: var(--heading);
+            margin-bottom: 2px;
+        }
+
+        .qual-place {
+            display: block;
+            font-size: 11.5px;
+            color: var(--subtle);
+            margin-bottom: 1px;
+        }
+
+        .qual-date {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* ── MAIN CONTENT ── */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+        /* ── PANELS ── */
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 11px 18px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-header-text {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--subtle);
+        }
+
+        .panel-header-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .panel-body {
+            padding: 18px 20px 20px;
+        }
+
+        /* ── ABOUT ME ── */
+        .about-grid {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--border);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 3px solid var(--border);
+        }
+
+        .about-text ul {
+            padding-left: 16px;
+            line-height: 1.8;
+            color: var(--body);
+        }
+
+        .about-text li { font-size: 13.5px; }
+        .about-text li::marker { color: var(--muted); }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 14px 0;
+        }
+
+        .quote {
+            font-size: 12.5px;
+            color: var(--subtle);
+            line-height: 1.7;
+            border-left: 2px solid var(--accent);
+            padding-left: 12px;
+        }
+
+        .quote strong {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 500;
+            margin-bottom: 4px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── PROJECTS ── */
+        .project-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-item:first-child { padding-top: 0; }
+        .project-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .project-name {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--heading);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--accent);
+            background: #2a2040;
+            border: 1px solid #3d2f5e;
+            padding: 1px 7px;
+            border-radius: 3px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .project-desc {
+            font-size: 12.5px;
+            color: var(--subtle);
+            line-height: 1.65;
+        }
+
+        /* ── CONTACTS ── */
+        .contact-row {
+            display: flex;
+            gap: 20px;
+            padding: 9px 0;
+            border-bottom: 1px solid var(--border);
+            align-items: baseline;
+        }
+
+        .contact-row:first-child { padding-top: 0; }
+        .contact-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .contact-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--muted);
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        .contact-value {
+            font-size: 13px;
+            color: var(--body);
+        }
+
+        .contact-value a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 1px;
+            transition: border-color 0.15s;
+        }
+
+        .contact-value a:hover {
+            border-color: var(--accent);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            margin-top: 4px;
+            font-size: 11.5px;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+        }
+
+        .highlight { color: var(--accent); }
+
+        /* ── COLLAPSIBLE TREE ── */
+        .tree {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .tree > details {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .tree > details > summary {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--body);
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+            background: #1e1f23;
+            transition: background 0.12s, color 0.12s;
+        }
+
+        .tree > details > summary::-webkit-details-marker { display: none; }
+        .tree > details > summary:hover { background: #26272c; color: var(--heading); }
+        .tree > details[open] > summary {
+            color: var(--heading);
+            background: #26272c;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tree-arrow {
+            font-style: normal;
+            font-size: 10px;
+            color: var(--muted);
+            display: inline-block;
+            transition: transform 0.15s;
+            flex-shrink: 0;
+        }
+
+        .tree > details[open] > summary .tree-arrow {
+            transform: rotate(90deg);
+            color: var(--accent);
+        }
+
+        .tree-icon {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .tree > details[open] > summary .tree-icon { color: var(--accent); }
+
+        .tree-body {
+            padding: 8px 12px 10px 32px;
+            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        /* nested details */
+        .tree-body details {
+            border-left: 1px solid var(--border);
+            margin-left: 4px;
+        }
+
+        .tree-body details summary {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--subtle);
+            cursor: pointer;
+            list-style: none;
+            background: transparent;
+            transition: color 0.12s;
+        }
+
+        .tree-body details summary::-webkit-details-marker { display: none; }
+        .tree-body details summary:hover { color: var(--body); }
+        .tree-body details[open] > summary { color: var(--body); }
+        .tree-body details[open] > summary .tree-arrow { transform: rotate(90deg); color: var(--accent); }
+
+        .tree-inner {
+            padding: 4px 10px 8px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .tree-leaf {
+            font-size: 12px;
+            color: var(--subtle);
+            line-height: 1.55;
+            padding: 2px 0;
+            display: flex;
+            gap: 8px;
+        }
+
+        .tree-leaf::before {
+            content: '–';
+            color: var(--muted);
+            flex-shrink: 0;
+        }
+
+        /* ── CONTACT FORM ── */
+        .contact-form {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--body);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            padding: 8px 10px;
+            outline: none;
+            transition: border-color 0.15s;
+            resize: none;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus { border-color: var(--accent); }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder { color: var(--muted); }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .form-submit {
+            align-self: flex-start;
+            display: inline-block;
+            text-decoration: none;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 8px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .form-submit:hover { background: var(--accent); color: #18191c; }
+
+        .form-note {
+            font-size: 11px;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 600px) {
+            .body-layout { flex-direction: column; }
+            .sidebar { width: 100%; position: static; }
+            nav a { padding: 10px 12px; font-size: 11px; }
+            .site-title { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+<div class="wrapper">
+
+    <!-- HEADER -->
+    <header>
+        <div class="site-title">Isaac Cid Entrolizo</div>
+        <div class="site-subtitle">Writer · Student · Cebu, Philippines</div>
+    </header>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#about" class="active">About me</a>
+        <a href="#projects">Projects</a>
+        <a href="#contacts">Contacts</a>
+    </nav>
+
+    <!-- BODY -->
+    <div class="body-layout">
+
+        <!-- SIDEBAR: QUALIFICATIONS -->
+        <aside class="sidebar">
+            <div class="sidebar-label">Qualifications</div>
+
+            <div class="qual-item">
+                <span class="qual-role">Student</span>
+                <span class="qual-place">University of Cebu — South</span>
+                <span class="qual-date">2025 — present</span>
+            </div>
+
+            <div class="qual-item">
+                <span class="qual-role">Literary Fiction Writer</span>
+                <span class="qual-place">Independent</span>
+                <span class="qual-date">Ongoing</span>
+            </div>
+
+            <div class="qual-item">
+                <span class="qual-role">Novice Programmer</span>
+                <span class="qual-place">Self-taught</span>
+                <span class="qual-date">Ongoing</span>
+            </div>
+
+            <div class="qual-item">
+                <span class="qual-role">Minecraft Builder</span>
+                <span class="qual-place">Various Communities</span>
+                <span class="qual-date">Ongoing</span>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+
+            <!-- ABOUT ME -->
+            <div class="panel" id="about">
+                <div class="panel-header">
+                    <span class="panel-header-dot"></span>
+                    <span class="panel-header-text">About Me</span>
+                </div>
+                <div class="panel-body">
+                    <div class="about-grid">
+                        <div class="avatar">
+                            <img src="c:\Users\Ice\Pictures\434029285_730595175898642_3969509223418338771_n - Copy.png" alt="Isaac">
+                        </div>
+                        <div class="about-text">
+                            <ul>
+                                <li>Isaac Cid Entrolizo &nbsp;·&nbsp; She/Her &nbsp;·&nbsp; 17 &nbsp;·&nbsp; Cebu, Philippines</li>
+                                <li>Avid reader and writer of fiction and media</li>
+                                <li>Hobbies: creative writing, reading, exploring different kinds of media</li>
+                                <li>Welcome to my portfolio</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr class="divider">
+                    <div class="quote">
+                        <strong>Fyodor Dostoevsky — The Brothers Karamazov</strong>
+                        "Love all God's creation, the whole and every grain of sand in it. Love every leaf, every ray of God's light. Love the animals, love the plants, love every thing."
+                    </div>
+
+                    <hr class="divider">
+
+                    <div class="tree">
+
+                        <details>
+                            <summary>
+                                <i class="tree-arrow">▶</i>
+                                <span class="tree-icon">◈</span>
+                                Background
+                            </summary>
+                            <div class="tree-body">
+                                <div class="tree-leaf">Full name: Isaac Cid Entrolizo</div>
+                                <div class="tree-leaf">She/Her · 17 years old</div>
+                                <div class="tree-leaf">Based in Cebu City, Philippines</div>
+                                <div class="tree-leaf">Currently enrolled at University of Cebu — South</div>
+                                <div class="tree-leaf">Known online as Rai-Raii, Wraith, Isaac, Izyc, and Chiel</div>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>
+                                <i class="tree-arrow">▶</i>
+                                <span class="tree-icon">◈</span>
+                                Interests & Hobbies
+                            </summary>
+                            <div class="tree-body">
+
+                                <details>
+                                    <summary><i class="tree-arrow">▶</i> Reading</summary>
+                                    <div class="tree-inner">
+                                        <div class="tree-leaf">Literary fiction, especially Russian classics</div>
+                                        <div class="tree-leaf">Favourite author: Fyodor Dostoevsky</div>
+                                        <div class="tree-leaf">Also reads manga, webcomics, and fanfiction</div>
+                                        <div class="tree-leaf">Drawn to character-driven, morally complex narratives</div>
+                                    </div>
+                                </details>
+
+                                <details>
+                                    <summary><i class="tree-arrow">▶</i> Media & Games</summary>
+                                    <div class="tree-inner">
+                                        <div class="tree-leaf">Narrative and story-driven games</div>
+                                        <div class="tree-leaf">Minecraft — particularly cinematic building and world design</div>
+                                        <div class="tree-leaf">Interested in how games use structure to tell stories</div>
+                                    </div>
+                                </details>
+
+                                <details>
+                                    <summary><i class="tree-arrow">▶</i> Programming</summary>
+                                    <div class="tree-inner">
+                                        <div class="tree-leaf">Self-taught, currently a novice</div>
+                                        <div class="tree-leaf">Builds small scripts and tools as side projects</div>
+                                        <div class="tree-leaf">Learning through experimentation and curiosity</div>
+                                    </div>
+                                </details>
+
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>
+                                <i class="tree-arrow">▶</i>
+                                <span class="tree-icon">◈</span>
+                                Writing
+                            </summary>
+                            <div class="tree-body">
+
+                                <details>
+                                    <summary><i class="tree-arrow">▶</i> Style & Approach</summary>
+                                    <div class="tree-inner">
+                                        <div class="tree-leaf">Writes literary and romantic fiction</div>
+                                        <div class="tree-leaf">Interested in moral philosophy and ideology in character work</div>
+                                        <div class="tree-leaf">Draws influence from Dostoevsky, Russian literature, and fanfiction communities</div>
+                                        <div class="tree-leaf">Works in both English and Bisaya</div>
+                                    </div>
+                                </details>
+
+                                <details>
+                                    <summary><i class="tree-arrow">▶</i> Active Projects</summary>
+                                    <div class="tree-inner">
+                                        <div class="tree-leaf">"The Most Romantic Story Ever Told" — original novel in progress</div>
+                                        <div class="tree-leaf">Fanfiction works published on AO3 under WraithISC</div>
+                                        <div class="tree-leaf">Bilingual scripts under the pen name jenx</div>
+                                    </div>
+                                </details>
+
+                            </div>
+                        </details>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PROJECTS -->
+            <div class="panel" id="projects">
+                <div class="panel-header">
+                    <span class="panel-header-dot"></span>
+                    <span class="panel-header-text">Projects</span>
+                </div>
+                <div class="panel-body">
+
+                    <div class="project-item">
+                        <div class="project-name">
+                            "The Most Romantic Story Ever Told"
+                            <span class="project-tag">Writing</span>
+                        </div>
+                        <div class="project-desc">A novel telling a romantic tragedy — two characters with clashing ideologies facing insurmountable obstacles.</div>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-name">
+                            Programming Scripts
+                            <span class="project-tag">Coding</span>
+                        </div>
+                        <div class="project-desc">A collection of miscellaneous programming scripts, listed in my GitHub repository.</div>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-name">
+                            Virtual Environment Designs in Minecraft
+                            <span class="project-tag">Design</span>
+                        </div>
+                        <div class="project-desc">Builds and creations made within Minecraft, leaning towards cinematographic works.</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CONTACTS -->
+            <div class="panel" id="contacts">
+                <div class="panel-header">
+                    <span class="panel-header-dot"></span>
+                    <span class="panel-header-text">Contacts</span>
+                </div>
+                <div class="panel-body">
+
+                    <div class="contact-row">
+                        <span class="contact-label">Location</span>
+                        <span class="contact-value">Cebu City, Philippines</span>
+                    </div>
+
+                    <div class="contact-row">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value"><a href="mailto:wraith.isc@gmail.com">wraith.isc@gmail.com</a></span>
+                    </div>
+
+                    <div class="contact-row">
+                        <span class="contact-label">Links</span>
+                        <span class="contact-value">
+                            <a href="https://archiveofourown.org/users/WraithISC">AO3</a>
+                            &nbsp;·&nbsp;
+                            <a href="https://raii-raii.lurk.me/">Lurk.me</a>
+                        </span>
+                    </div>
+
+                    <div class="contact-row">
+                        <span class="contact-label">Pen names</span>
+                        <span class="contact-value">Rai-Raii &nbsp;·&nbsp; Wraith &nbsp;·&nbsp; Isaac &nbsp;·&nbsp; Izyc &nbsp;·&nbsp; Chiel</span>
+                    </div>
+
+                    <div class="contact-form">
+                        <div class="form-row">
+                            <div>
+                                <label class="form-label" for="cf-name">Your name</label>
+                                <input class="form-input" id="cf-name" type="text" placeholder="e.g. Name" autocomplete="off">
+                            </div>
+                            <div>
+                                <label class="form-label" for="cf-subject">Subject</label>
+                                <input class="form-input" id="cf-subject" type="text" placeholder="e.g. Collaboration">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label" for="cf-message">Message</label>
+                            <textarea class="form-input form-textarea" id="cf-message" rows="5" placeholder="Write your message here..."></textarea>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                            <a class="form-submit" id="cf-send" href="mailto:wraith.isc@gmail.com">Send message</a>
+                            <span class="form-note">Opens your email client with the message pre-filled.</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <footer>
+                © 2026 <span class="highlight">Entrolizo, Isaac Cid</span> &nbsp;·&nbsp; made with DETERMINATION!!@
+            </footer>
+
+        </div>
+    </div>
+
+</div>
+</div>
+</body>
+</html>
