@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection | Your Name</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        :root {
+            --bg:       #18191c;
+            --surface:  #212226;
+            --border:   #2e2f34;
+            --muted:    #5a5c63;
+            --subtle:   #8a8c94;
+            --body:     #c9cad0;
+            --heading:  #e8e9ec;
+            --accent:   #a78bca;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--body);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page { display: flex; justify-content: center; padding: 0 24px 64px; }
+        .wrapper { width: 100%; max-width: 1500px; }
+
+        /* ── HEADER ── */
+        header {
+            padding: 52px 0 28px;
+            border-bottom: 1px solid var(--border);
+        }
+        .back {
+            display: inline-block;
+            margin-bottom: 18px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: var(--subtle);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color 0.15s, border-color 0.15s;
+        }
+        .back:hover, .back:focus-visible { color: var(--accent); border-color: var(--accent); outline: none; }
+
+        .site-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--heading);
+            letter-spacing: 0.01em;
+            line-height: 1.15;
+        }
+        .site-subtitle {
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--subtle);
+            letter-spacing: 0.02em;
+        }
+
+        /* ── NAV BAR (same as main site) ── */
+        nav {
+            width: 100%;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+        nav a {
+            color: var(--subtle);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 12px 18px;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: color 0.15s, border-color 0.15s;
+        }
+        nav a:hover, nav a:focus-visible { color: var(--body); outline: none; }
+        nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+        /* ── PANELS (same as main site) ── */
+        main { display: flex; flex-direction: column; gap: 40px; }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            scroll-margin-top: 16px;
+        }
+        .panel-header {
+            padding: 11px 18px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .panel-header-dot {
+            width: 6px; height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .panel-header-text {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--subtle);
+        }
+        .panel-tag {
+            margin-left: auto;
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--accent);
+            background: #2a2040;
+            border: 1px solid #3d2f5e;
+            padding: 1px 7px;
+            border-radius: 3px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .panel-body { padding: 18px 20px 8px; }
+
+        /* ── SHELF ── */
+        .track {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 2px 2px 14px;
+            scroll-snap-type: x proximity;
+            scrollbar-width: thin;
+            scrollbar-color: #3d2f5e transparent;
+        }
+        .track:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+        .item {
+            flex: 0 0 170px;
+            scroll-snap-align: start;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .item-art {
+            position: relative;
+            aspect-ratio: 2 / 3;
+            background: #1b1c20;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+            color: var(--muted);
+            font-size: 11px;
+            transition: border-color 0.15s, transform 0.15s;
+        }
+        .item-art img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        a.item:hover .item-art, a.item:focus-visible .item-art {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        a.item:focus-visible { outline: none; }
+
+        .item-title { margin-top: 9px; font-size: 12.5px; font-weight: 600; color: var(--heading); line-height: 1.35; }
+        .item-note  { font-size: 11.5px; color: var(--subtle); line-height: 1.5; }
+
+        /* ── FOOTER ── */
+        footer {
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            font-size: 11.5px;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+        }
+        .highlight { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            .site-title { font-size: 1.7rem; }
+            nav a { padding: 10px 12px; font-size: 11px; }
+            .item { flex-basis: 136px; }
+            .panel-body { padding: 14px 14px 6px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .item-art { transition: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+<div class="wrapper">
+
+    <header>
+        <a class="back" href="index (2).html">← Back to portfolio</a>
+        <h1 class="site-title">My Collection</h1>
+        <p class="site-subtitle">The games, movies, books and music I keep coming back to.</p>
+    </header>
+
+    <nav aria-label="Sections" id="site-nav">
+        <a href="#games" class="active">Games</a>
+        <a href="#movies">Movies</a>
+        <a href="#books">Books</a>
+        <a href="#music">Music</a>
+        <a href="#misc">Misc</a>
+    </nav>
+
+    <main id="shelves"></main>
+
+    <footer>© 2026 <span class="highlight">Your Name</span> &nbsp;·&nbsp; my collection</footer>
+
+</div>
+</div>
+
+<script>
+(function () {
+    'use strict';
+
+    /* ─────────────────────────────────────────────
+       EDIT YOUR COLLECTION HERE
+       - title: name shown under the cover
+       - note:  optional short line (author, year, why you love it…)
+       - img:   path to a cover image (a grey placeholder shows if missing)
+       - url:   optional link; leave '' to make the cover non-clickable
+       ───────────────────────────────────────────── */
+    var COLLECTION = [
+        { id: 'games',  name: 'Games',  items: [
+            { title: 'Game title 1', note: 'Why I love it', img: 'images/collection/games-1.jpg', url: '' },
+            { title: 'Game title 2', note: '', img: 'images/collection/games-2.jpg', url: '' },
+            { title: 'Game title 3', note: '', img: 'images/collection/games-3.jpg', url: '' },
+            { title: 'Game title 4', note: '', img: 'images/collection/games-4.jpg', url: '' },
+            { title: 'Game title 5', note: '', img: 'images/collection/games-5.jpg', url: '' },
+            { title: 'Game title 6', note: '', img: 'images/collection/games-6.jpg', url: '' }
+        ]},
+        { id: 'movies', name: 'Movies', items: [
+            { title: 'Movie title 1', note: 'Year', img: 'images/collection/movies-1.jpg', url: '' },
+            { title: 'Movie title 2', note: '', img: 'images/collection/movies-2.jpg', url: '' },
+            { title: 'Movie title 3', note: '', img: 'images/collection/movies-3.jpg', url: '' },
+            { title: 'Movie title 4', note: '', img: 'images/collection/movies-4.jpg', url: '' },
+            { title: 'Movie title 5', note: '', img: 'images/collection/movies-5.jpg', url: '' },
+            { title: 'Movie title 6', note: '', img: 'images/collection/movies-6.jpg', url: '' }
+        ]},
+        { id: 'books',  name: 'Books',  items: [
+            { title: 'Book title 1', note: 'Author', img: 'images/collection/books-1.jpg', url: '' },
+            { title: 'Book title 2', note: '', img: 'images/collection/books-2.jpg', url: '' },
+            { title: 'Book title 3', note: '', img: 'images/collection/books-3.jpg', url: '' },
+            { title: 'Book title 4', note: '', img: 'images/collection/books-4.jpg', url: '' },
+            { title: 'Book title 5', note: '', img: 'images/collection/books-5.jpg', url: '' },
+            { title: 'Book title 6', note: '', img: 'images/collection/books-6.jpg', url: '' }
+        ]},
+        { id: 'music',  name: 'Music',  items: [
+            { title: 'Album or song 1', note: 'Artist', img: 'images/collection/music-1.jpg', url: '' },
+            { title: 'Album or song 2', note: '', img: 'images/collection/music-2.jpg', url: '' },
+            { title: 'Album or song 3', note: '', img: 'images/collection/music-3.jpg', url: '' },
+            { title: 'Album or song 4', note: '', img: 'images/collection/music-4.jpg', url: '' },
+            { title: 'Album or song 5', note: '', img: 'images/collection/music-5.jpg', url: '' },
+            { title: 'Album or song 6', note: '', img: 'images/collection/music-6.jpg', url: '' }
+        ]},
+        { id: 'misc',   name: 'Misc',   items: [
+            { title: 'Anything else 1', note: '', img: 'images/collection/misc-1.jpg', url: '' },
+            { title: 'Anything else 2', note: '', img: 'images/collection/misc-2.jpg', url: '' },
+            { title: 'Anything else 3', note: '', img: 'images/collection/misc-3.jpg', url: '' },
+            { title: 'Anything else 4', note: '', img: 'images/collection/misc-4.jpg', url: '' },
+            { title: 'Anything else 5', note: '', img: 'images/collection/misc-5.jpg', url: '' },
+            { title: 'Anything else 6', note: '', img: 'images/collection/misc-6.jpg', url: '' }
+        ]}
+    ];
+
+    /* ── Rendering (no need to edit below) ── */
+    function el(tag, cls, text) {
+        var n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (text) n.textContent = text;
+        return n;
+    }
+
+    var root = document.getElementById('shelves');
+
+    COLLECTION.forEach(function (cat) {
+        var panel = el('section', 'panel');
+        panel.id = cat.id;
+        panel.setAttribute('aria-labelledby', cat.id + '-title');
+
+        var head = el('div', 'panel-header');
+        head.appendChild(el('span', 'panel-header-dot'));
+        var title = el('h2', 'panel-header-text', cat.name);
+        title.id = cat.id + '-title';
+        head.appendChild(title);
+        head.appendChild(el('span', 'panel-tag', cat.items.length + ' picks'));
+        panel.appendChild(head);
+
+        var body = el('div', 'panel-body');
+        var track = el('div', 'track');
+        track.tabIndex = 0;
+        track.setAttribute('role', 'list');
+        track.setAttribute('aria-label', cat.name + ' — scroll sideways');
+
+        cat.items.forEach(function (it) {
+            var card = it.url ? el('a', 'item') : el('div', 'item');
+            if (it.url) { card.href = it.url; card.target = '_blank'; card.rel = 'noopener'; }
+            card.setAttribute('role', 'listitem');
+
+            var art = el('div', 'item-art');
+            art.appendChild(el('span', null, 'Cover'));
+            if (it.img) {
+                var img = new Image();
+                img.alt = '';
+                img.loading = 'lazy';
+                img.onerror = function () { img.remove(); };
+                img.src = it.img;
+                art.appendChild(img);
+            }
+            card.appendChild(art);
+            card.appendChild(el('div', 'item-title', it.title));
+            if (it.note) card.appendChild(el('div', 'item-note', it.note));
+            track.appendChild(card);
+        });
+
+        body.appendChild(track);
+        panel.appendChild(body);
+        root.appendChild(panel);
+    });
+
+    /* ── Highlight the nav link for the panel in view ── */
+    var links = Array.prototype.slice.call(document.querySelectorAll('#site-nav a'));
+    function setActive(id) {
+        links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + id); });
+    }
+    links.forEach(function (a) {
+        a.addEventListener('click', function () { setActive(a.getAttribute('href').slice(1)); });
+    });
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { if (e.isIntersecting) setActive(e.target.id); });
+        }, { rootMargin: '-20% 0px -65% 0px' });
+        root.querySelectorAll('.panel').forEach(function (p) { io.observe(p); });
+    }
+})();
+</script>
+</body>
+</html>
