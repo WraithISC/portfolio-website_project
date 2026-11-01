@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Isaac Cid Entrolizo | Portfolio</title>
+    <title>Your Name | Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -155,6 +155,36 @@
             font-size: 11px;
             color: var(--muted);
         }
+
+
+        /* ── SIDEBAR COLLECTION LINK ── */
+        .collection-block { margin-top: 28px; }
+        .collection-link {
+            display: block;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--surface);
+            transition: border-color 0.15s;
+        }
+        .collection-link:hover, .collection-link:focus-visible { border-color: var(--accent); outline: none; }
+        .collection-cover {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            background: #2a2b31;
+            display: grid;
+            place-items: center;
+            color: var(--muted);
+            font-size: 11px;
+        }
+        .collection-cover img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%; object-fit: contain;
+        }
+        .collection-caption { padding: 9px 11px 10px; }
+        .collection-caption strong { display: block; font-size: 12.5px; font-weight: 500; color: var(--heading); }
+        .collection-caption span { display: block; font-size: 11px; color: var(--subtle); margin-top: 1px; }
 
         /* ── MAIN CONTENT ── */
         .main-content {
@@ -532,6 +562,236 @@
             font-style: italic;
         }
 
+
+        /* ── EXPANDABLE PROJECTS ── */
+        .project-toggle {
+            all: unset;
+            box-sizing: border-box;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            cursor: pointer;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--heading);
+            padding: 2px 0;
+            border-radius: 3px;
+        }
+        .project-toggle:hover .project-chevron { color: var(--body); }
+        .project-chevron {
+            margin-left: auto;
+            font-size: 10px;
+            color: var(--muted);
+            transition: transform 0.2s ease, color 0.15s;
+        }
+        .project-toggle[aria-expanded="true"] .project-chevron {
+            transform: rotate(90deg);
+            color: var(--accent);
+        }
+        :is(.project-toggle, .page-card, .gallery-arrow, .lightbox-close):focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        .project-item .project-desc { margin-top: 4px; }
+
+        .project-drawer {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.28s ease;
+        }
+        .project-drawer.open { grid-template-rows: 1fr; }
+        .project-drawer-inner { overflow: hidden; min-height: 0; }
+        .project-media { padding-top: 14px; }
+
+        /* Story pages */
+        .pages-row {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .page-card {
+            all: unset;
+            box-sizing: border-box;
+            position: relative;
+            aspect-ratio: 3 / 4.3;
+            background: #ecdcd0;
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: zoom-in;
+            display: grid;
+            place-items: center;
+            color: #8b7565;
+            font-size: 11px;
+            transition: transform 0.15s;
+        }
+        .page-card:hover { transform: translateY(-2px); }
+        .page-card img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* GitHub profile */
+        .gh-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            min-height: 120px;
+        }
+        .gh-status { font-size: 12.5px; color: var(--subtle); }
+        .gh-head { display: flex; gap: 14px; align-items: center; }
+        .gh-avatar {
+            width: 64px; height: 64px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            flex-shrink: 0;
+            background: var(--surface);
+        }
+        .gh-name { font-size: 15px; font-weight: 600; color: var(--heading); }
+        .gh-login { font-size: 12px; color: var(--subtle); }
+        .gh-bio { font-size: 12.5px; color: var(--body); margin-top: 4px; }
+        .gh-stats {
+            display: flex; gap: 18px; flex-wrap: wrap;
+            margin-top: 12px; font-size: 12px; color: var(--subtle);
+        }
+        .gh-stats b { color: var(--heading); font-weight: 600; }
+        .gh-repos {
+            list-style: none;
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 10px;
+        }
+        .gh-repo {
+            display: block;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 10px 12px;
+            background: var(--surface);
+            transition: border-color 0.15s;
+        }
+        .gh-repo:hover { border-color: var(--accent); }
+        .gh-repo-name { font-size: 12.5px; font-weight: 600; color: var(--accent); }
+        .gh-repo-desc {
+            font-size: 11.5px; color: var(--subtle); margin-top: 3px;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .gh-repo-meta { font-size: 11px; color: var(--muted); margin-top: 6px; }
+        .gh-link {
+            display: inline-block; margin-top: 14px;
+            font-size: 12px; color: var(--accent); text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+        .gh-link:hover { border-color: var(--accent); }
+
+        /* Gallery */
+        .gallery { position: relative; display: flex; align-items: center; gap: 10px; }
+        .gallery-track {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+            padding-bottom: 8px;
+        }
+        .gallery-item {
+            all: unset;
+            box-sizing: border-box;
+            flex: 0 0 min(62%, 460px);
+            aspect-ratio: 16 / 9;
+            scroll-snap-align: start;
+            background: #d9d9d9;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+            cursor: zoom-in;
+            display: grid;
+            place-items: center;
+            color: #777;
+            font-size: 11px;
+        }
+        .gallery-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .gallery-item img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .gallery-arrow {
+            all: unset;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            width: 34px; height: 34px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: grid; place-items: center;
+            color: var(--body);
+            cursor: pointer;
+            font-size: 16px;
+            transition: border-color 0.15s, color 0.15s, opacity 0.15s;
+        }
+        .gallery-arrow:hover { border-color: var(--accent); color: var(--accent); }
+        .gallery-arrow[disabled] { opacity: 0.3; cursor: default; pointer-events: none; }
+
+        /* Lightbox */
+        .lightbox {
+            margin: auto;
+            border: none;
+            background: transparent;
+            padding: 0;
+            max-width: 92vw;
+            max-height: 92vh;
+            overflow: visible;
+        }
+        .lightbox::backdrop { background: rgba(10, 10, 12, 0.88); }
+        .lightbox-body {
+            min-width: min(80vw, 420px);
+            min-height: 240px;
+            background: var(--surface);
+            border-radius: 6px;
+            display: grid;
+            place-items: center;
+            color: var(--subtle);
+            font-size: 13px;
+            overflow: hidden;
+        }
+        .lightbox-body img { display: block; max-width: 92vw; max-height: 88vh; }
+        .lightbox-close {
+            all: unset;
+            position: absolute; top: -14px; right: -14px;
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--heading);
+            display: grid; place-items: center;
+            cursor: pointer; font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .pages-row {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding-bottom: 6px;
+            }
+            .page-card { flex: 0 0 38%; scroll-snap-align: start; }
+            .gallery-item { flex-basis: 84%; }
+            .gallery-arrow { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .project-drawer, .project-chevron, .page-card { transition: none; }
+            .gallery-track { scroll-behavior: auto; }
+        }
+
         /* ── MOBILE ── */
         @media (max-width: 600px) {
             .body-layout { flex-direction: column; }
@@ -548,8 +808,8 @@
 
     <!-- HEADER -->
     <header>
-        <div class="site-title">Isaac Cid Entrolizo</div>
-        <div class="site-subtitle">Writer · Student · Cebu, Philippines</div>
+        <div class="site-title">Rai-Raii! ˗ˏˋ✩ˎˊ˗</div>
+        <div class="site-subtitle">Writer · Student · Gamer</div>
     </header>
 
     <!-- NAV -->
@@ -568,8 +828,8 @@
 
             <div class="qual-item">
                 <span class="qual-role">Student</span>
-                <span class="qual-place">University of Cebu — South</span>
-                <span class="qual-date">2025 — present</span>
+                <span class="qual-place">UNIVERSITY - Computer Science Department</span>
+                <span class="qual-date">2025 — 2026</span>
             </div>
 
             <div class="qual-item">
@@ -580,14 +840,28 @@
 
             <div class="qual-item">
                 <span class="qual-role">Novice Programmer</span>
-                <span class="qual-place">Self-taught</span>
+                <span class="qual-place">Independent</span>
                 <span class="qual-date">Ongoing</span>
             </div>
 
             <div class="qual-item">
                 <span class="qual-role">Minecraft Builder</span>
-                <span class="qual-place">Various Communities</span>
+                <span class="qual-place">Independent</span>
                 <span class="qual-date">Ongoing</span>
+            </div>
+
+            <div class="collection-block">
+                <div class="sidebar-label">Collection</div>
+                <a class="collection-link" href="collection.html" aria-label="A collection of my favorite medias">
+                    <div class="collection-cover">
+                        <span>Cover image</span>
+                        <img src="E:\Chuck\Ice's Folder\MISC\lurk.me\cathypi.png" alt="" onerror="this.remove()">
+                    </div>
+                    <div class="collection-caption">
+                        <strong>My Favorites</strong>
+                        <span>Games, Movies, Books, Music, and More</span>
+                    </div>
+                </a>
             </div>
         </aside>
 
@@ -603,14 +877,14 @@
                 <div class="panel-body">
                     <div class="about-grid">
                         <div class="avatar">
-                            <img src="c:\Users\Ice\Pictures\434029285_730595175898642_3969509223418338771_n - Copy.png" alt="Isaac">
+                            <img src="E:\Pictures\Camera Roll\Dess.jpg" alt="Profile photo">
                         </div>
                         <div class="about-text">
                             <ul>
-                                <li>Isaac Cid Entrolizo &nbsp;·&nbsp; She/Her &nbsp;·&nbsp; 17 &nbsp;·&nbsp; Cebu, Philippines</li>
-                                <li>Avid reader and writer of fiction and media</li>
-                                <li>Hobbies: creative writing, reading, exploring different kinds of media</li>
-                                <li>Welcome to my portfolio</li>
+                                <li>Rai-Raii! &nbsp;·&nbsp; From The Philippines.</li>
+                                <li>Welcome to my Portfolio!!!</li>
+                                <li>Lover of literature, reading and writing.</li>
+                                <li>Hobbies: creative writing, reading, exploring different kinds of media, gaming, and coding.</li>
                             </ul>
                         </div>
                     </div>
@@ -631,11 +905,10 @@
                                 Background
                             </summary>
                             <div class="tree-body">
-                                <div class="tree-leaf">Full name: Isaac Cid Entrolizo</div>
-                                <div class="tree-leaf">She/Her · 17 years old</div>
-                                <div class="tree-leaf">Based in Cebu City, Philippines</div>
-                                <div class="tree-leaf">Currently enrolled at University of Cebu — South</div>
-                                <div class="tree-leaf">Known online as Rai-Raii, Wraith, Isaac, Izyc, and Chiel</div>
+                                <div class="tree-leaf">Name: Rai-Raii, Chiel, Wraith</div>
+                                <div class="tree-leaf">She/Her · 17</div>
+                                <div class="tree-leaf">Cebu, Philippines</div>
+                                <div class="tree-leaf">Currently enrolled at University</div>
                             </div>
                         </details>
 
@@ -700,8 +973,8 @@
                                     <summary><i class="tree-arrow">▶</i> Active Projects</summary>
                                     <div class="tree-inner">
                                         <div class="tree-leaf">"The Most Romantic Story Ever Told" — original novel in progress</div>
-                                        <div class="tree-leaf">Fanfiction works published on AO3 under WraithISC</div>
-                                        <div class="tree-leaf">Bilingual scripts under the pen name jenx</div>
+                                        <div class="tree-leaf">"Strikeout" — Bickel Fanfiction</div>
+                                        <div class="tree-leaf">"The Last of a Good Man" — Scriptwriting Project</div>
                                     </div>
                                 </details>
 
@@ -721,28 +994,103 @@
                 </div>
                 <div class="panel-body">
 
+                    <!-- WRITING -->
                     <div class="project-item">
-                        <div class="project-name">
+                        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="drawer-writing">
                             "The Most Romantic Story Ever Told"
                             <span class="project-tag">Writing</span>
-                        </div>
+                            <span class="project-chevron" aria-hidden="true">▶</span>
+                        </button>
                         <div class="project-desc">A novel telling a romantic tragedy — two characters with clashing ideologies facing insurmountable obstacles.</div>
+                        <div class="project-drawer" id="drawer-writing">
+                            <div class="project-drawer-inner">
+                                <div class="project-media pages-row">
+                                    <button class="page-card" type="button" data-full="E:\Chuck\Ice's Folder\SCHOOL\Books\In Aeternum Vale\In Aeternum Vale-01.png" data-caption="Page 1" aria-label="Open page 1">
+                                        <span>Page 1</span>
+                                        <img src="E:\Chuck\Ice's Folder\SCHOOL\Books\In Aeternum Vale\In Aeternum Vale-01.png" alt="Story page 1" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                    <button class="page-card" type="button" data-full="E:\Chuck\Ice's Folder\SCHOOL\Books\In Aeternum Vale\In Aeternum Vale-02.png" data-caption="Page 2" aria-label="Open page 2">
+                                        <span>Page 2</span>
+                                        <img src="E:\Chuck\Ice's Folder\SCHOOL\Books\In Aeternum Vale\In Aeternum Vale-02.png" alt="Story page 2" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                    <button class="page-card" type="button" data-full="E:\Chuck\Ice's Folder\SCHOOL\Books\In Aeternum Vale\In Aeternum Vale-03.png" data-caption="Page 3" aria-label="Open page 3">
+                                        <span>Page 3</span>
+                                        <img src="E:\Chuck\Ice's Folder\SCHOOL\Books\In Aeternum Vale\In Aeternum Vale-03.png" alt="Story page 3" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                    <button class="page-card" type="button" data-full="E:\Chuck\Ice's Folder\SCHOOL\Books\In Aeternum Vale\In Aeternum Vale-04.png" data-caption="Page 4" aria-label="Open page 4">
+                                        <span>Page 4</span>
+                                        <img src="E:\Chuck\Ice's Folder\SCHOOL\Books\In Aeternum Vale\In Aeternum Vale-04.png" alt="Story page 4" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                    <button class="page-card" type="button" data-full="E:\Chuck\Ice's Folder\SCHOOL\Books\In Aeternum Vale\In Aeternum Vale-05.png" data-caption="Page 5" aria-label="Open page 5">
+                                        <span>Page 5</span>
+                                        <img src="E:\Chuck\Ice's Folder\SCHOOL\Books\In Aeternum Vale\In Aeternum Vale-05.png" alt="Story page 5" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- CODING -->
                     <div class="project-item">
-                        <div class="project-name">
+                        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="drawer-coding" data-github>
                             Programming Scripts
                             <span class="project-tag">Coding</span>
-                        </div>
+                            <span class="project-chevron" aria-hidden="true">▶</span>
+                        </button>
                         <div class="project-desc">A collection of miscellaneous programming scripts, listed in my GitHub repository.</div>
+                        <div class="project-drawer" id="drawer-coding">
+                            <div class="project-drawer-inner">
+                                <div class="project-media">
+                                    <div class="gh-card" id="gh-card" aria-live="polite">
+                                        <div class="gh-status">Loading GitHub profile…</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- DESIGN -->
                     <div class="project-item">
-                        <div class="project-name">
+                        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="drawer-design">
                             Virtual Environment Designs in Minecraft
                             <span class="project-tag">Design</span>
-                        </div>
+                            <span class="project-chevron" aria-hidden="true">▶</span>
+                        </button>
                         <div class="project-desc">Builds and creations made within Minecraft, leaning towards cinematographic works.</div>
+                        <div class="project-drawer" id="drawer-design">
+                            <div class="project-drawer-inner">
+                                <div class="project-media gallery">
+                                    <button class="gallery-arrow" type="button" data-dir="-1" aria-label="Scroll gallery left">←</button>
+                                    <div class="gallery-track" tabindex="0" aria-label="Minecraft build gallery">
+                                    <button class="gallery-item" type="button" data-full="images/minecraft/build-1.jpg" data-caption="Build 1" aria-label="Open build 1">
+                                        <span>Build 1</span>
+                                        <img src="images/minecraft/build-1.jpg" alt="Minecraft build 1" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                    <button class="gallery-item" type="button" data-full="images/minecraft/build-2.jpg" data-caption="Build 2" aria-label="Open build 2">
+                                        <span>Build 2</span>
+                                        <img src="images/minecraft/build-2.jpg" alt="Minecraft build 2" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                    <button class="gallery-item" type="button" data-full="images/minecraft/build-3.jpg" data-caption="Build 3" aria-label="Open build 3">
+                                        <span>Build 3</span>
+                                        <img src="images/minecraft/build-3.jpg" alt="Minecraft build 3" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                    <button class="gallery-item" type="button" data-full="images/minecraft/build-4.jpg" data-caption="Build 4" aria-label="Open build 4">
+                                        <span>Build 4</span>
+                                        <img src="images/minecraft/build-4.jpg" alt="Minecraft build 4" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                    <button class="gallery-item" type="button" data-full="images/minecraft/build-5.jpg" data-caption="Build 5" aria-label="Open build 5">
+                                        <span>Build 5</span>
+                                        <img src="images/minecraft/build-5.jpg" alt="Minecraft build 5" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                    <button class="gallery-item" type="button" data-full="images/minecraft/build-6.jpg" data-caption="Build 6" aria-label="Open build 6">
+                                        <span>Build 6</span>
+                                        <img src="images/minecraft/build-6.jpg" alt="Minecraft build 6" loading="lazy" onerror="this.remove()">
+                                    </button>
+                                    </div>
+                                    <button class="gallery-arrow" type="button" data-dir="1" aria-label="Scroll gallery right">→</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -758,26 +1106,26 @@
 
                     <div class="contact-row">
                         <span class="contact-label">Location</span>
-                        <span class="contact-value">Cebu City, Philippines</span>
+                        <span class="contact-value">Your City, Country</span>
                     </div>
 
                     <div class="contact-row">
                         <span class="contact-label">Email</span>
-                        <span class="contact-value"><a href="mailto:wraith.isc@gmail.com">wraith.isc@gmail.com</a></span>
+                        <span class="contact-value"><a href="mailto:you@example.com">you@example.com</a></span>
                     </div>
 
                     <div class="contact-row">
                         <span class="contact-label">Links</span>
                         <span class="contact-value">
-                            <a href="https://archiveofourown.org/users/WraithISC">AO3</a>
+                            <a href="https://example.com/your-profile">Link 1</a>
                             &nbsp;·&nbsp;
-                            <a href="https://raii-raii.lurk.me/">Lurk.me</a>
+                            <a href="https://example.com/your-site">Link 2</a>
                         </span>
                     </div>
 
                     <div class="contact-row">
                         <span class="contact-label">Pen names</span>
-                        <span class="contact-value">Rai-Raii &nbsp;·&nbsp; Wraith &nbsp;·&nbsp; Isaac &nbsp;·&nbsp; Izyc &nbsp;·&nbsp; Chiel</span>
+                        <span class="contact-value">Your Pen Name</span>
                     </div>
 
                     <div class="contact-form">
@@ -796,7 +1144,7 @@
                             <textarea class="form-input form-textarea" id="cf-message" rows="5" placeholder="Write your message here..."></textarea>
                         </div>
                         <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
-                            <a class="form-submit" id="cf-send" href="mailto:wraith.isc@gmail.com">Send message</a>
+                            <a class="form-submit" id="cf-send" href="mailto:you@example.com">Send message</a>
                             <span class="form-note">Opens your email client with the message pre-filled.</span>
                         </div>
                     </div>
@@ -806,7 +1154,7 @@
 
             <!-- FOOTER -->
             <footer>
-                © 2026 <span class="highlight">Entrolizo, Isaac Cid</span> &nbsp;·&nbsp; made with DETERMINATION!!@
+                © 2026 <span class="highlight">Your Name</span> &nbsp;·&nbsp; made with DETERMINATION!!@
             </footer>
 
         </div>
@@ -814,5 +1162,154 @@
 
 </div>
 </div>
+
+<dialog class="lightbox" id="lightbox" aria-label="Image viewer">
+    <button class="lightbox-close" type="button" aria-label="Close viewer">✕</button>
+    <div class="lightbox-body" id="lightbox-body"></div>
+</dialog>
+
+<script>
+(function () {
+    'use strict';
+
+    /* ── Set your GitHub username here ── */
+    var GITHUB_USERNAME = 'WraithISC';
+
+    /* ── Expands/Collapses project drawers ── */
+    var ghLoaded = false;
+    document.querySelectorAll('.project-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var open = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', String(!open));
+            document.getElementById(btn.getAttribute('aria-controls')).classList.toggle('open', !open);
+            if (!open && btn.hasAttribute('data-github') && !ghLoaded) {
+                ghLoaded = true;
+                loadGitHub();
+            }
+            if (!open) updateArrows();
+        });
+    });
+
+    /* ── Pages/Gallery ── */
+    var box = document.getElementById('lightbox');
+    var boxBody = document.getElementById('lightbox-body');
+    document.querySelectorAll('.page-card, .gallery-item').forEach(function (el) {
+        el.addEventListener('click', function () {
+            boxBody.textContent = '';
+            var src = el.getAttribute('data-full');
+            var img = new Image();
+            img.alt = el.getAttribute('data-caption') || '';
+            img.onload = function () { boxBody.textContent = ''; boxBody.appendChild(img); };
+            img.onerror = function () { boxBody.textContent = (el.getAttribute('data-caption') || 'Image') + ' — image not added yet'; };
+            img.src = src;
+            boxBody.textContent = 'Loading…';
+            box.showModal();
+        });
+    });
+    box.querySelector('.lightbox-close').addEventListener('click', function () { box.close(); });
+    box.addEventListener('click', function (e) { if (e.target === box) box.close(); });
+
+    /* ── Gallery arrows ── */
+    var track = document.querySelector('.gallery-track');
+    var arrows = document.querySelectorAll('.gallery-arrow');
+    function updateArrows() {
+        if (!track) return;
+        var max = track.scrollWidth - track.clientWidth - 2;
+        arrows[0].disabled = track.scrollLeft <= 2;
+        arrows[1].disabled = track.scrollLeft >= max;
+    }
+    arrows.forEach(function (a) {
+        a.addEventListener('click', function () {
+            var step = track.clientWidth * 0.8;
+            track.scrollBy({ left: step * Number(a.dataset.dir), behavior: 'smooth' });
+        });
+    });
+    if (track) {
+        track.addEventListener('scroll', updateArrows, { passive: true });
+        window.addEventListener('resize', updateArrows);
+        track.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowRight') { track.scrollBy({ left: 200, behavior: 'smooth' }); }
+            if (e.key === 'ArrowLeft') { track.scrollBy({ left: -200, behavior: 'smooth' }); }
+        });
+        updateArrows();
+    }
+
+    /* ── GitHub profile ── */
+    function el(tag, cls, text) {
+        var n = document.createElement(tag);
+        if (cls) n.className = cls;
+        if (text != null) n.textContent = text;
+        return n;
+    }
+
+    function loadGitHub() {
+        var card = document.getElementById('gh-card');
+        var base = 'https://api.github.com/users/' + encodeURIComponent(GITHUB_USERNAME);
+
+        function fail(msg) {
+            card.textContent = '';
+            var p = el('div', 'gh-status', msg);
+            card.appendChild(p);
+            var a = el('a', 'gh-link', 'Open on GitHub');
+            a.href = 'https://github.com/' + encodeURIComponent(GITHUB_USERNAME);
+            a.target = '_blank'; a.rel = 'noopener';
+            card.appendChild(a);
+        }
+
+        Promise.all([
+            fetch(base).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+            fetch(base + '/repos?sort=updated&per_page=6').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        ]).then(function (res) {
+            var u = res[0], repos = res[1];
+            card.textContent = '';
+
+            var head = el('div', 'gh-head');
+            var av = el('img', 'gh-avatar');
+            av.src = u.avatar_url; av.alt = ''; av.width = 64; av.height = 64;
+            head.appendChild(av);
+            var who = el('div');
+            who.appendChild(el('div', 'gh-name', u.name || u.login));
+            who.appendChild(el('div', 'gh-login', '@' + u.login));
+            if (u.bio) who.appendChild(el('div', 'gh-bio', u.bio));
+            head.appendChild(who);
+            card.appendChild(head);
+
+            var stats = el('div', 'gh-stats');
+            [['Repositories', u.public_repos], ['Followers', u.followers], ['Following', u.following]].forEach(function (p) {
+                var sp = el('span');
+                var b = el('b', null, String(p[1]));
+                sp.appendChild(b);
+                sp.appendChild(document.createTextNode(' ' + p[0]));
+                stats.appendChild(sp);
+            });
+            card.appendChild(stats);
+
+            if (repos.length) {
+                var list = el('ul', 'gh-repos');
+                repos.forEach(function (r) {
+                    var li = el('li');
+                    var a = el('a', 'gh-repo');
+                    a.href = r.html_url; a.target = '_blank'; a.rel = 'noopener';
+                    a.appendChild(el('div', 'gh-repo-name', r.name));
+                    if (r.description) a.appendChild(el('div', 'gh-repo-desc', r.description));
+                    var meta = [r.language, r.stargazers_count ? '★ ' + r.stargazers_count : null].filter(Boolean).join('  ·  ');
+                    if (meta) a.appendChild(el('div', 'gh-repo-meta', meta));
+                    li.appendChild(a);
+                    list.appendChild(li);
+                });
+                card.appendChild(list);
+            }
+
+            var link = el('a', 'gh-link', 'View full profile on GitHub');
+            link.href = u.html_url; link.target = '_blank'; link.rel = 'noopener';
+            card.appendChild(link);
+        }).catch(function () {
+            fail(GITHUB_USERNAME === 'your-github-username'
+                ? 'Set your GitHub username in the script (GITHUB_USERNAME) to show your profile here.'
+                : 'Could not load the GitHub profile right now.');
+        });
+    }
+})();
+</script>
 </body>
 </html>
